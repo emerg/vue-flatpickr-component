@@ -50,6 +50,10 @@
           wrap: false
         })
       },
+      events: {
+        type: Array,
+        default: () => hooks
+      }
     },
     data() {
       return {
@@ -64,8 +68,8 @@
       /* istanbul ignore if */
       if (this.fp) return;
 
-      // Inject our method into hooks array
-      hooks.forEach((hook) => {
+      // Inject our method into events array
+      this.events.forEach((hook) => {
         this.config[hook] = arrayify(this.config[hook] || []).concat((...args) => {
           this.$emit(camelToKebab(hook), ...args)
         });
@@ -104,8 +108,8 @@
       config: {
         deep: true,
         handler(newConfig) {
-          // Workaround: Don't pass hooks to configs again
-          hooks.forEach((hook) => {
+          // Workaround: Don't pass events to configs again
+          this.events.forEach((hook) => {
             delete newConfig[hook];
           });
           this.fp.set(newConfig);
