@@ -128,12 +128,12 @@
     /**
      * Free up memory
      */
-    beforeDestroy() {
-      /* istanbul ignore else */
-      if (this.fp) {
-        this.fp.destroy();
-        this.fp = null;
-      }
-    },
+    // destroyed() {
+    //   /* istanbul ignore else */
+    //   if (this.fp) {
+    //     this.fp.destroy();
+    //     this.fp = null;
+    //   }
+    // },
   };
 </script>
